@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+  ServerName www.{{ virtual_server }}.com.uy
+  ServerAdmin webmaster@{{ virtual_server }}.com.uy
+  DocumentRoot /var/www/{{ virtual_server }}/html
+
+  <Directory /var/www/{{ virtual_server }}/html>
+     Options Indexes FollowSymLinks
+     AllowOverride none
+     Require all granted
+  </Directory>
+
+</VirtualHost>

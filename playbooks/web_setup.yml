@@ -1,0 +1,80 @@
+---
+
+- name: Configurar Servidor Web
+  hosts: webserver
+  become: true
+
+  tasks:
+
+  - name: Installar Apache (httpd)
+    ansible.builtin.yum:
+      name: httpd
+      state: present
+
+  - name: Asegurar que el servicio Apache (httpd) está iniciado y habilitado
+    ansible.builtin.systemd_service:
+      name: httpd
+      state: started
+      enabled: true
+
+  - name: Asegurar que el firewall permite HTTP y HTTPS
+    ansible.posix.firewalld:
+      service: "{{ item }}"
+      state: enabled
+      permanent: true
+      immediate: true
+    loop: [http,https]
+
+  - name: Agregar registro al archivo host
+    ansible.builtin.lineinfile:
+      path: /etc/hosts
+      line: "192.168.56.20 {{ virtual_server }}.com.uy"
+      state: present
+    delegate_to: localhost
+    connection: local
+
+  - name: Modificar configuración de Apache para VirtualHost
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      line: "IncludeOptional /etc/httpd/vhost.d/*.conf"
+    notify: Reiniciar Apache
+
+  - name: Asegurar existencia de directorio para VirtualHost
+    ansible.builtin.file:
+      path: /etc/httpd/vhost.d
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+
+  - name: Asegurar existencia de directorio para alojar el sitio
+    ansible.builtin.file:
+      path: "/var/www/{{ virtual_server }}/html"
+      state: directory
+      owner: apache
+      group: apache
+      mode: '0755'
+
+  - name: Configurar VirtualHost
+    ansible.builtin.template:
+      src: ../templates/virtualhost.j2
+      dest: "/etc/httpd/vhost.d/{{ virtual_server }}.conf"
+      owner: root
+      group: root
+      mode: '0644'
+    notify: Reiniciar Apache
+
+  - name: Desplegar archivo index.html
+    ansible.builtin.template:
+      src: ../templates/index.j2
+      dest: "/var/www/{{ virtual_server }}/html/index.html"
+      owner: apache
+      group: apache
+      mode: '0644'
+
+  handlers:
+
+  - name: Reiniciar Apache
+    ansible.builtin.systemd_service:
+      name: httpd
+      state: restarted
