@@ -76,5 +76,12 @@ El playbook [`playbooks/hardening.yml`](playbooks/hardening.yml) implementa medi
 
 Además, configura la autenticación por clave pública para el usuario sysadmin y deshabilita la autenticación por contraseña en SSH.
 
+Para ejecutar el playbook de configuración SSH cuando la autenticación con clave pública aún no está configurada, se debe utilizar la opción --ask-pass para que Ansible solicite la contraseña SSH:
+
+   ```bash
+   ansible-playbook -i inventories/inventory.ini playbooks/ssh_setup.yml --ask-pass
+   ```
+Para que esta ejecución funcione correctamente, es necesario que la máquina donde se ejecuta Ansible tenga instalado `sshpass`, ya que este programa permite manejar la autenticación con contraseña en Ansible.
+
 Ejecución del playbook:
-![Ejecución del playbook hardering.yml](results/08-ejecucion_hardering.png)
+![Ejecución del playbook hardering](results/08-ejecucion_hardering.png)

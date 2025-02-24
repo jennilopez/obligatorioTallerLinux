@@ -9,21 +9,21 @@ Este repositorio contiene la implementación del obligatorio del **Taller de ser
 obligatorioTallerLinux/
 ├── collections/
 │   └── requirements.yml
+├── documento.md
 ├── inventories/
 │   ├── group_vars/
 │   │   └── linux.yml
-│   └── servers.ini
-├── results/
-├── templates/
-│   ├── index.j2
-│   └── virtualhost.j2
-├── playbooks/
-│   ├── webserver.yml
-│   ├── hardening.yml
-│   └── updates.yml
+│   └── inventory.ini
 ├── LICENSE
+├── playbooks/
+│   ├── hardening.yml
+│   └── web_setup.yml
 ├── README.md
-└── ansible_report.md
+├── results/
+│   ├── ... #capturas de ejecuciones
+└── templates/
+    ├── index.j2
+    └── virtualhost.j2
 ```
 
 ## Configuración

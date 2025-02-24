@@ -5,17 +5,17 @@
 
   tasks:
   - name: Permitir trafico saliente
-    comunity.general.ufw:
+    community.general.ufw:
       policy: allow
       direction: outgoing
 
   - name: Bloquear trafico entrante por defecto
-    comunity.general.ufw:
+    community.general.ufw:
       policy: deny
       direction: incoming
 
   - name: Permitir trafico SSH
-    comunity.general.ufw:
+    community.general.ufw:
       rule: allow
       name: OpenSSH
 
@@ -23,11 +23,11 @@
     community.general.ufw:
       state: enabled
 
-  - name: Asegurar que exista clase publica para el usuario sysadmin
+  - name: Asegurar que exista clave publica para el usuario sysadmin
     ansible.posix.authorized_key:
       user: sysadmin
       state: present
-      key: "{{ lookup('file','/home/sysdmin/.ssh/id_rsa.pub') }}"
+      key: "{{ lookup('file','~/.ssh/id_rsa.pub') }}"
 
   - name: Deshabilitar autenticacion por contraseña en SSH
     ansible.builtin.lineinfile:
