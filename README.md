@@ -7,21 +7,23 @@ Este repositorio contiene la implementación del obligatorio del **Taller de ser
 
 ```plaintext
 obligatorioTallerLinux/
-├── collections/
+├── collections
 │   └── requirements.yml
-├── documento.md
-├── inventories/
-│   ├── group_vars/
+├── documents
+│   ├── ansible_basics.md
+│   └── documento.md
+├── inventories
+│   ├── group_vars
 │   │   └── linux.yml
 │   └── inventory.ini
 ├── LICENSE
-├── playbooks/
+├── playbooks
 │   ├── hardening.yml
 │   └── web_setup.yml
 ├── README.md
-├── results/
+├── results
 │   ├── ... #capturas de ejecuciones
-└── templates/
+└── templates
     ├── index.j2
     └── virtualhost.j2
 ```
@@ -47,10 +49,11 @@ Las colecciones necesarias están definidas en collections/requirements.yml. Ins
 
 ## Documentación
 
-La documentación completa sobre la ejecución de los comandos ad-hoc y playbooks, junto con capturas de pantalla y análisis, se encuentra en [`documento.md`](documento.md).
+La documentación completa sobre la ejecución de los comandos ad-hoc y playbooks, junto con capturas de pantalla, se encuentra en [`documents/documento.md`](documents/documento.md).
 
 Este archivo contiene:
 - Salidas de los comandos ejecutados.
 - Capturas de pantalla guardadas en `results/`.
 - Explicación de cada playbook y su impacto en los servidores.
-- Respuestas a las preguntas teóricas sobre Ansible.
+
+Respuestas a las preguntas teóricas sobre Ansible se encuentran en [`documents/ansible_basics.md`](documents/ansible_basics.md).
