@@ -1,6 +1,6 @@
 # Documentación del Obligatorio del Taller de servidores Linux
 
-Este documento detalla la implementación del obligatorio del Taller del Servidores Linux. Incluye la ejecución de comandos ad-hoc, playbooks de Ansible y respuestas a preguntas teóricas.
+Este documento detalla la implementación del obligatorio del Taller del Servidores Linux. Incluye la ejecución de comandos ad-hoc y playbooks de Ansible.
 
 ## 1. Inventario de Ansible
 
@@ -80,12 +80,11 @@ El playbook [`playbooks/hardening.yml`](../playbooks/hardening.yml) implementa m
 
 Además, configura la autenticación por clave pública para el usuario sysadmin y deshabilita la autenticación por contraseña en SSH.
 
-Para ejecutar el playbook de configuración SSH cuando la autenticación con clave pública aún no está configurada, se debe utilizar la opción --ask-pass para que Ansible solicite la contraseña SSH:
+Para ejecutar este playbook se debe utilizar la opción --ask-pass para que Ansible solicite la contraseña SSH, ya que sin este parametro Ansible intentará conectarse mediante la clave SSH:
 
    ```bash
-   ansible-playbook -i inventories/inventory.ini playbooks/ssh_setup.yml --ask-pass
+   ansible-playbook -i inventories/inventory.ini playbooks/hardering.yml --ask-become-pass --ask-pass
    ```
-Para que esta ejecución funcione correctamente, es necesario que la máquina donde se ejecuta Ansible tenga instalado `sshpass`, ya que este programa permite manejar la autenticación con contraseña en Ansible.
 
 Ejecución del playbook:
 

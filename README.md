@@ -7,23 +7,23 @@ Este repositorio contiene la implementación del obligatorio del **Taller de ser
 
 ```plaintext
 obligatorioTallerLinux/
-├── collections
+├── collections/
 │   └── requirements.yml
-├── documents
+├── documents/
 │   ├── ansible_basics.md
 │   └── documento.md
-├── inventories
-│   ├── group_vars
+├── inventories/
+│   ├── group_vars/
 │   │   └── linux.yml
 │   └── inventory.ini
 ├── LICENSE
-├── playbooks
+├── playbooks/
 │   ├── hardening.yml
 │   └── web_setup.yml
 ├── README.md
-├── results
+├── results/
 │   ├── ... #capturas de ejecuciones
-└── templates
+└── templates/
     ├── index.j2
     └── virtualhost.j2
 ```
